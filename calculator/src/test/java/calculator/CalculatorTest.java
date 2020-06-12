@@ -1,10 +1,14 @@
 package calculator;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.text.MessageFormat;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -62,6 +66,7 @@ class CalculatorTest {
 
 		//ASSERT
 		assertEquals(7,somme);
+		assertThat(somme).isEqualTo(7);
 
 	}
 	@Test
@@ -77,6 +82,7 @@ class CalculatorTest {
 
 		//ASSERT
 		assertEquals(-5,substract);
+		assertThat(substract).isEqualTo(-5);
 	}
 
 	@Test
@@ -140,5 +146,17 @@ class CalculatorTest {
 		// Assert
 		// ...
 	}
+	@Test
+	@DisplayName("test de temps")
+	public void listDigits_shouldReturnsTheListOfDigits_ofPositiveInteger() {
+		// GIVEN
+		int number = 95897;
 
+		// WHEN
+		Set<Integer> actualDigits = calculatorUnderTest.digitsSet(number);
+
+		// THEN
+		Set<Integer> expectedDigits = Stream.of(5, 7, 8, 9).collect(Collectors.toSet());
+		assertThat(actualDigits).containsExactlyInAnyOrder(9,5,8,7);
+	}
 }

@@ -1,5 +1,8 @@
 package calculator;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import Interface.CalculatorInt;
 
 public class Calculator implements CalculatorInt {
@@ -39,14 +42,28 @@ public class Calculator implements CalculatorInt {
 		return result;
 
 	}
-   
+
 	public void longCalculation() {
 		try {
-		    // Attendre 2 secondes
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
+			// Attendre 2 secondes
+			Thread.sleep(500);
+		} catch (InterruptedException e) { 
 			e.printStackTrace();
 		}
 	}
+
+	public Set<Integer> digitsSet(int number) {
+		final Set<Integer> integers = new HashSet<Integer>();
+		final String numberString = String.valueOf(number);
+		for(int i = 0; i< numberString.length(); i++) {
+			if (numberString.charAt(i) != '-') {
+				integers.add(Integer.parseInt(numberString, i, i+1, 10));
+			}
+		}
+		return integers;
+
+	}
+
+
 
 }
